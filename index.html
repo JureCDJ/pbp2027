@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PBP 2027 · načrt</title>
+<style>
+:root{
+  --paper:#E8ECE7; --card:#F5F7F3; --ink:#1C2540; --muted:#59627A; --line:#C3C9CF;
+  --stamp:#8C2C4C; --hivis:#C9D600; --hivis-ink:#1C2540; --ok:#2E6A4E; --night:#D5DAE4;
+  --ride:#1C2540; --stop:#8A93A8; --sleep:#8C2C4C;
+  color-scheme:light;
+  --cond:"Avenir Next Condensed","Roboto Condensed","Arial Narrow","Helvetica Neue",sans-serif;
+  --body:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#141A2A;--card:#1B2236;--ink:#E2E6EE;--muted:#98A1B5;--line:#2F3850;
+  --stamp:#E0799A;--hivis:#D2DE2C;--hivis-ink:#141A2A;--ok:#7FC8A2;--night:#20283D;
+  --ride:#C9D0DE;--stop:#5F6880;--sleep:#E0799A;color-scheme:dark}
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 var(--body);
+  padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+h1,h2,h3{font-family:var(--cond);font-weight:700;line-height:1.15;margin:0}
+h2{font-size:1.6rem;margin:0 0 .75rem}
+h3{font-size:1.15rem;margin:1.5rem 0 .5rem}
+.num,td,input[type=number]{font-variant-numeric:tabular-nums}
+a{color:inherit}
+header.top{position:sticky;top:0;z-index:5;background:var(--ink);color:var(--paper)}
+header.top .bar{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:1rem;padding:.6rem 1rem;flex-wrap:wrap}
+header.top h1{font-size:1.5rem;letter-spacing:.01em}
+header.top .count{font-family:var(--cond);font-size:1.05rem;opacity:.85}
+header.top .spacer{flex:1}
+.btn{font:inherit;font-size:.9rem;border:1.5px solid currentColor;background:transparent;color:inherit;border-radius:999px;padding:.3rem .85rem;cursor:pointer}
+.btn.fill{background:var(--hivis);color:var(--hivis-ink);border-color:var(--hivis)}
+.btn.small{font-size:.8rem;padding:.15rem .6rem}
+.btn.danger{color:var(--stamp)}
+.btn:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--hivis);outline-offset:2px}
+nav.tabs{display:flex;gap:.25rem;overflow-x:auto;max-width:1180px;margin:0 auto;padding:0 1rem;scrollbar-width:none}
+nav.tabs button{font:600 .95rem var(--cond);background:none;border:0;color:var(--paper);opacity:.7;padding:.55rem .7rem;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+nav.tabs button[aria-selected=true]{opacity:1;border-bottom-color:var(--hivis)}
+.dirty{background:var(--hivis);color:var(--hivis-ink);font-size:.85rem;text-align:center;padding:.3rem 1rem}
+main{max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+.lead{color:var(--muted);max-width:70ch;margin:0 0 1rem}
+.flag{display:inline-block;font-size:.78rem;border:1px dashed var(--stamp);color:var(--stamp);border-radius:4px;padding:0 .4rem;margin-left:.4rem;vertical-align:middle}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.box{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1rem}
+.fields{display:grid;gap:.6rem 1rem;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.field label{display:block;font-size:.8rem;color:var(--muted);margin-bottom:.15rem}
+input,select,textarea{font:inherit;color:inherit;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:.35rem .5rem;width:100%}
+textarea{min-height:4.5rem;resize:vertical}
+input[type=checkbox]{width:auto;accent-color:var(--ink)}
+input:disabled,select:disabled,textarea:disabled{background:transparent;border-color:transparent;color:var(--ink);-webkit-text-fill-color:var(--ink);opacity:1;padding-left:0;resize:none}
+select:disabled{appearance:none}
+body.read .edit-only{display:none!important}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+table.t{border-collapse:collapse;width:100%;font-size:.88rem}
+table.t th{font:600 .82rem var(--cond);text-align:left;color:var(--muted);padding:.5rem .45rem;border-bottom:1px solid var(--line);white-space:nowrap;position:sticky;top:0;background:var(--card)}
+table.t td{padding:.3rem .45rem;border-bottom:1px solid var(--line);vertical-align:middle}
+table.t td input,table.t td select{min-width:4.5rem;padding:.2rem .35rem}
+table.t td.w input{min-width:10rem}
+table.t tr.ph td:first-child{border-left:3px dashed var(--stamp)}
+.badge{display:inline-block;border-radius:4px;padding:.05rem .45rem;font-size:.82rem;font-weight:600;white-space:nowrap}
+.badge.ok{background:var(--hivis);color:var(--hivis-ink)}
+.badge.bad{background:var(--stamp);color:var(--paper)}
+.badge.mid{border:1px solid var(--line);color:var(--muted)}
+.stat{display:flex;flex-direction:column}
+.stat b{font:700 2rem/1.1 var(--cond)}
+.stat span{font-size:.82rem;color:var(--muted)}
+.stats{display:flex;flex-wrap:wrap;gap:1.5rem 2.5rem;margin:.5rem 0 1rem}
+.hero{display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:end;border-bottom:2px solid var(--ink);padding-bottom:1rem;margin-bottom:1.25rem}
+.hero .days{font:800 clamp(4rem,14vw,8.5rem)/.85 var(--cond);letter-spacing:-.02em}
+.hero .days small{display:block;font-size:1rem;font-weight:600;letter-spacing:0;margin-top:.4rem}
+.hero p{margin:0;color:var(--muted)}
+ul.clean{list-style:none;padding:0;margin:0}
+ul.clean li{padding:.35rem 0;border-bottom:1px solid var(--line)}
+.row{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.qual{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem}
+.qual div{border:2px solid var(--line);border-radius:8px;padding:.6rem;text-align:center;font:700 1.3rem var(--cond)}
+.qual div.done{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.qual div small{display:block;font:500 .75rem var(--body);opacity:.8}
+/* brevet card */
+.card-grid{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fill,minmax(285px,1fr))}
+.ctl{position:relative;background:var(--card);border:1.5px dashed var(--ink);border-radius:4px;padding:.9rem .9rem 1rem}
+.ctl.passed{border-style:solid}
+.ctl .no{font:800 2.4rem/1 var(--cond);opacity:.15;position:absolute;right:.7rem;top:.4rem}
+.ctl h3{margin:0 0 .15rem;font-size:1.25rem;padding-right:3rem}
+.ctl .km{color:var(--muted);font-size:.85rem}
+.ctl .times{display:flex;gap:1.2rem;margin:.6rem 0}
+.ctl .times b{font:700 1.5rem/1 var(--cond);display:block}
+.ctl .times span{font-size:.75rem;color:var(--muted)}
+.ctl ul{margin:.4rem 0 0;padding:0;list-style:none}
+.ctl li label{display:flex;gap:.45rem;align-items:flex-start;font-size:.9rem;padding:.1rem 0}
+.ctl .food{font-size:.88rem;margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--line)}
+.ctl .live{margin-top:.6rem;display:flex;gap:.4rem;align-items:center}
+.ctl .live input{font-size:.85rem}
+.stampmark{position:absolute;right:.8rem;top:3rem;width:5.2rem;height:5.2rem;border:3px double var(--stamp);border-radius:50%;color:var(--stamp);display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-12deg);font:700 1.05rem/1.05 var(--cond);text-align:center;background:color-mix(in srgb,var(--card) 80%,transparent)}
+.stampmark small{font-size:.65rem;font-weight:600}
+.crew{font-size:.8rem;font-weight:600}
+.crew.no{color:var(--stamp)}
+svg text{fill:var(--muted);font:11px var(--body)}
+.chart{width:100%;height:auto;display:block}
+.legend{display:flex;gap:1rem;font-size:.82rem;color:var(--muted);flex-wrap:wrap}
+.legend i{display:inline-block;width:.8rem;height:.8rem;border-radius:2px;margin-right:.3rem;vertical-align:-1px}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.cal .h{font:600 .8rem var(--cond);color:var(--muted);padding:.2rem}
+.cal .d{min-height:5.2rem;background:var(--card);border:1px solid var(--line);border-radius:4px;padding:.2rem .3rem;font-size:.75rem}
+.cal .d.out{opacity:.35}
+.cal .d.today{border-color:var(--ink);border-width:2px}
+.cal .d .n{font-weight:700}
+.cal .ev{display:block;border-radius:3px;padding:0 .25rem;margin-top:2px;background:var(--ink);color:var(--paper);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cal .ev.brevet{background:var(--hivis);color:var(--hivis-ink)}
+.cal .ev.deadline{background:var(--stamp);color:var(--paper)}
+.brev{margin-bottom:1rem}
+.brev summary{cursor:pointer;display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;font:600 1.05rem var(--cond)}
+.note{font-size:.85rem;color:var(--muted)}
+@media (max-width:640px){
+  .hero{grid-template-columns:1fr}
+  .qual div{font-size:1.05rem}
+  .cal .d{min-height:3.6rem}
+  .cal .ev{font-size:.65rem}
+}
+@media (prefers-reduced-motion:no-preference){.stampmark{animation:stamp .25s ease-out}}
+@keyframes stamp{from{transform:rotate(-12deg) scale(1.4);opacity:0}to{transform:rotate(-12deg) scale(1);opacity:1}}
+@media print{header.top,.edit-only,.live{display:none!important}body{background:#fff}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="bar">
+    <h1>PBP 2027</h1>
+    <span class="count" id="count"></span>
+    <span class="spacer"></span>
+    <button class="btn" id="modeBtn" type="button"></button>
+  </div>
+  <nav class="tabs" id="tabs" aria-label="Moduli"></nav>
+</header>
+<div id="dirty" class="dirty" hidden>Neshranjene spremembe. Izvozi JSON v zavihku Podatki in ga naloži na GitHub.</div>
+<main id="main"></main>
+<input type="file" id="fileIn" accept=".json,application/json" hidden>
+
+<script>
+"use strict";
+const DEFAULT_DATA = {
+ "schemaVersion": 1,
+ "meta": {
+  "updated": "2026-10-26",
+  "note": "Kontrole so začasne (enakomerno razporejene). Uradna trasa 2027 še ni objavljena."
+ },
+ "event": {
+  "name": "Paris-Brest-Paris Randonneurs",
+  "edition": "21. izvedba, 2027",
+  "startPlace": "Rambouillet",
+  "startDate": "2027-08-22",
+  "startTime": "16:00",
+  "group": "80 h",
+  "timeLimitH": 80,
+  "distanceKm": 1220,
+  "elevationM": 12000,
+  "registration": {
+   "preRegFrom": "2027-01-15",
+   "finalFrom": "2027-05-29",
+   "finalTo": "2027-07-04",
+   "refundUntil": "2027-06-27",
+   "status": "Ni prijave",
+   "departureSlot": "",
+   "frameNumber": "",
+   "crewDeclared": false
+  },
+  "rules": [
+   "Pomoč (avtodom) je dovoljena samo v kontrolnih mestih in njihovi neposredni okolici.",
+   "Pomoč je treba prijaviti ob registraciji.",
+   "V okolici Mont St Michela (Roz-sur-Couesnon, Pleine-Fougères) je pomoč z vozilom popolnoma prepovedana.",
+   "Spremljevalno vozilo na trasi = kazen ali diskvalifikacija.",
+   "V 2027 so pred štartom obvezni BRM 200, 300, 400 in 600.",
+   "Predprijava (januar 2027, postopoma) zahteva homologacijsko številko najdaljšega BRM iz 2026.",
+   "Aerobar je dovoljen. Odlaganja torb na kontrolah ni."
+  ],
+  "links": [
+   {
+    "label": "Uradna stran PBP",
+    "url": "https://www.paris-brest-paris.org/en/"
+   }
+  ],
+  "notes": "Začetni čas skupine 80 h je ocena (vpiši uradnega ob objavi). Datum predprijave je približen."
+ },
+ "riders": [
+  {
+   "id": "r1",
+   "name": "Jure",
+   "weightKg": 75,
+   "bikeKg": 11,
+   "ftpW": 260,
+   "pctFlat": 60,
+   "pctClimb": 72,
+   "pctDescent": 20,
+   "cda": 0.34,
+   "notes": "Začasne vrednosti – vpiši svoje."
+  },
+  {
+   "id": "r2",
+   "name": "Partner",
+   "weightKg": 75,
+   "bikeKg": 11,
+   "ftpW": 260,
+   "pctFlat": 60,
+   "pctClimb": 72,
+   "pctDescent": 20,
+   "cda": 0.34,
+   "notes": "Začasne vrednosti – vpiši partnerjeve."
+  }
+ ],
+ "physics": {
+  "crr": 0.0045,
+  "rho": 1.2,
+  "drivetrainLossPct": 3,
+  "climbGradePct": 5,
+  "descentGradePct": 5,
+  "maxDescentKmh": 50,
+  "draftPct": 30,
+  "fatiguePctPer100km": 1.5,
+  "efficiencyPct": 23,
+  "calibrationPct": 100
+ },
+ "nutrition": {
+  "intakeKcalPerH": 280,
+  "carbGPerH": 70,
+  "fluidMlPerH": 600,
+  "restKcalPerMin": 1.3,
+  "notes": ""
+ },
+ "sleep": {
+  "awakeBeforeStartH": 8,
+  "notes": ""
+ },
+ "stopTypes": [
+  {
+   "id": "hitri",
+   "name": "Hitri postanek",
+   "minutes": 12,
+   "food": "Gel/ploščica v žepe, banana, kola",
+   "tasks": [
+    "Žig v kartico",
+    "Napolni bidone",
+    "WC",
+    "Hrana v žepe za naslednji odsek"
+   ]
+  },
+  {
+   "id": "podpora",
+   "name": "Postanek z avtodomom",
+   "minutes": 25,
+   "food": "Topel obrok iz avtodoma (testenine/riž), sladka pijača",
+   "tasks": [
+    "Žig v kartico",
+    "Zamenjaj bidone in žepno hrano iz avtodoma",
+    "Polni luč in Garmin",
+    "Mazanje verige",
+    "Krema za sedalo",
+    "Oblačila glede na noč/dan"
+   ]
+  },
+  {
+   "id": "spanje",
+   "name": "Spanje",
+   "minutes": 20,
+   "food": "Obrok pred spanjem, kava ob vstajanju",
+   "tasks": [
+    "Žig v kartico",
+    "Obrok",
+    "Higiena in krema",
+    "Vse naprave na polnjenje",
+    "Budilka (dve)",
+    "Oblačila za naslednjo etapo pripravljena"
+   ]
+  }
+ ],
+ "brevets": [
+  {
+   "id": "b1",
+   "season": 2026,
+   "date": "",
+   "name": "Brevet oktober 2026 (za predprijavo)",
+   "distance": 0,
+   "elevationM": 0,
+   "organizer": "",
+   "status": "planiran",
+   "homologation": "",
+   "movingTimeH": null,
+   "totalTimeH": null,
+   "avgPowerW": null,
+   "obsFood": "",
+   "obsGear": "",
+   "obsSleep": "",
+   "obsIssues": ""
+  },
+  {
+   "id": "b2",
+   "season": 2027,
+   "date": "",
+   "name": "BRM 200",
+   "distance": 200,
+   "elevationM": 0,
+   "organizer": "",
+   "status": "planiran",
+   "homologation": "",
+   "movingTimeH": null,
+   "totalTimeH": null,
+   "avgPowerW": null,
+   "obsFood": "",
+   "obsGear": "",
+   "obsSleep": "",
+   "obsIssues": ""
+  },
+  {
+   "id": "b3",
+   "season": 2027,
+   "date": "",
+   "name": "BRM 300",
+   "distance": 300,
+   "elevationM": 0,
+   "organizer": "",
+   "status": "planiran",
+   "homologation": "",
+   "movingTimeH": null,
+   "totalTimeH": null,
+   "avgPowerW": null,
+   "obsFood": "",
+   "obsGear": "",
+   "obsSleep": "",
+   "obsIssues": ""
+  },
+  {
+   "id": "b4",
+   "season": 2027,
+   "date": "",
+   "name": "BRM 400",
+   "distance": 400,
+   "elevationM": 0,
+   "organizer": "",
+   "status": "planiran",
+   "homologation": "",
+   "movingTimeH": null,
+   "totalTimeH": null,
+   "avgPowerW": null,
+   "obsFood": "",
+   "obsGear": "",
+   "obsSleep": "",
+   "obsIssues": ""
+  },
+  {
+   "id": "b5",
+   "season": 2027,
+   "date": "",
+   "name": "BRM 600",
+   "distance": 600,
+   "elevationM": 0,
+   "organizer": "",
+   "status": "planiran",
+   "homologation": "",
+   "movingTimeH": null,
+   "totalTimeH": null,
+   "avgPowerW": null,
+   "obsFood": "",
+   "obsGear": "",
+   "obsSleep": "",
+   "obsIssues": ""
+  }
+ ],
+ "calendar": [],
+ "controls": [
+  {
+   "id": "k0",
+   "name": "Rambouillet (start)",
+   "km": 0.0,
+   "gainM": 0,
+   "lossM": 0,
+   "closeH": 0.0,
+   "crew": true,
+   "stopType": "",
+   "stopMin": null,
+   "sleepMin": 0,
+   "foodKcal": 0,
+   "extraTasks": [],
+   "notes": "",
+   "placeholder": true
+  },
+  {
+   "id": "k1",
+   "name": "Kontrola 1",
+   "km": 76.2,
+   "gainM": 750,
+   "lossM": 750,
+   "closeH": 5.0,
+   "crew": true,
+   "stopType": "hitri",
+   "stopMin": null,
+   "sleepMin": 0,
+   "foodKcal": 400,
+   "extraTasks": [],
+   "notes": "",
+   "placeholder": true
+  },
+  {
+   "id": "k2",
+   "name": "Kontrola 2",
+   "km": 152.5,
+   "gainM": 750,
+   "lossM": 750,
+   "closeH": 10.0,
+   "crew": true,
+   "stopType": "hitri",
+   "stopMin": null,
+   "sleepMin": 0,
+   "foodKcal": 400,
+   "extraTasks": [],
+   "notes": "",
+   "placeholder": true
+  },
+  {
+   "id": "k3",
+   "name": "Kontrola 3",
+   "km": 228.8,
+   "gainM": 750,
+   "lossM": 750,
+   "closeH": 15.0,
+   "crew": true,
+   "stopType": "podpora",
+   "stopMin": null,
+   "sleepMin": 0,
+   "foodKcal": 900,
+   "extraTasks": [],
+   "notes": "",
+   "placeholder": true
+  },
+  {
+   "id": "k4",
+   "name": "Kontrola 4",
+   "km": 305.0,
+   "gainM": 750,
+   "lossM": 750,
+   "closeH": 20.0,
+   "crew": true,
+   "stopType": "hitri",
+   "stopMin": null,
+   "sleepMin": 0,
+   "foodKcal": 400,
+   "extraTasks": [],
+   "notes": "",
+   "placeholder": true
+  },
+  {
+   "id": "k5",
+   "name": "Kontrola 5",
+   "km": 381.2,
+   "gainM": 750,
+   "lossM": 750,
+   "closeH": 25.0,
+   "crew": true,
+   "stopType": "hitri",
+   "stopMin": null,
+   "sleepMin": 0,
+   "foodKcal": 400,
+   "extraTasks": [],
+   "notes": "",
+   "placeholder": true
+  },
+  {
+   "id": "k6",
+   "name": "Kontrola 6",
+   "km": 457.5,
+   "gainM": 750,
+   "lossM": 750,
+   "closeH": 30.0,
+   "crew": true,
+   "stopType": "spanje",
+   "stopMin": null,
+   "sleepMin": 90,
+   "foodKcal": 900,
+   "extraTasks": [],
+   "notes": "",
+   "placeholder": true
+  },
+  {
+   "id": "k7",
+   "name": "Kontrola 7",
+   "km": 533.8,
+   "gainM": 750,
+   "lossM": 750,
+   "closeH": 35.0,
+   "crew": true,
+   "stopType": "hitri",
+   "stopMin": null,
+   "sleepMin": 0,
+   "foodKcal": 400,
+   "extraTasks": [],
+   "notes": "",
+   "placeholder": true
+  },
+  {
+   "id": "k8",
+   "name": "Brest",
+   "km": 610.0,
+   "gainM": 750,
+   "lossM": 750,
+   "closeH": 40.0,
+   "crew": true,
+   "stopType": "hitri",
+   "stopMin": null,
+   "sleepMin": 0,
+   "foodKcal": 400,
+   "extraTasks": [],
+   "notes": "",
+   "placeholder": true
+  },
+  {
+   "id": "k9",
+   "name": "Kontrola 9",
+   "km": 686.2,
+   "gainM": 750,
+   "lossM": 750,
+   "closeH": 45.0,
+   "crew": true,
+   "stopType": "podpora",
+   "stopMin": null,
+   "sleepMin": 0,
+   "foodKcal": 900,
+   "extraTasks": [],
+   "notes": "",
+   "placeholder": true
+  },
+  {
+   "id": "k10",
+   "name": "Kontrola 10",
+   "km": 762.5,
+   "gainM": 750,
+   "lossM": 750,
+   "closeH": 50.0,
+   "crew": true,
+   "stopType": "hitri",
+   "stopMin": null,
+   "sleepMin": 0,
+   "foodKcal": 400,
+   "extraTasks": [],
+   "notes": "",
+   "placeholder": true
+  },
+  {
+   "id": "k11",
+   "name": "Kontrola 11",
+   "km": 838.8,
+   "gainM": 750,
+   "lossM": 750,
+   "closeH": 55.0,
+   "crew": true,
+   "stopType": "hitri",
+   "stopMin": null,
+   "sleepMin": 0,
+   "foodKcal": 400,
+   "extraTasks": [],
+   "notes": "",
+   "placeholder": true
+  },
+  {
+   "id": "k12",
+   "name": "Kontrola 12",
+   "km": 915.0,
+   "gainM": 750,
+   "lossM": 750,
+   "closeH": 60.0,
+   "crew": true,
+   "stopType": "spanje",
+   "stopMin": null,
+   "sleepMin": 120,
+   "foodKcal": 900,
+   "extraTasks": [],
+   "notes": "",
+   "placeholder": true
+  },
+  {
+   "id": "k13",
+   "name": "Kontrola 13",
+   "km": 991.2,
+   "gainM": 750,
+   "lossM": 750,
+   "closeH": 65.0,
+   "crew": true,
+   "stopType": "hitri",
+   "stopMin": null,
+   "sleepMin": 0,
+   "foodKcal": 400,
+   "extraTasks": [],
+   "notes": "",
+   "placeholder": true
+  },
+  {
+   "id": "k14",
+   "name": "Kontrola 14",
+   "km": 1067.5,
+   "gainM": 750,
+   "lossM": 750,
+   "closeH": 70.0,
+   "crew": true,
+   "stopType": "podpora",
+   "stopMin": null,
+   "sleepMin": 0,
+   "foodKcal": 900,
+   "extraTasks": [],
+   "notes": "",
+   "placeholder": true
+  },
+  {
+   "id": "k15",
+   "name": "Kontrola 15",
+   "km": 1143.8,
+   "gainM": 750,
+   "lossM": 750,
+   "closeH": 75.0,
+   "crew": true,
+   "stopType": "hitri",
+   "stopMin": null,
+   "sleepMin": 0,
+   "foodKcal": 400,
+   "extraTasks": [],
+   "notes": "",
+   "placeholder": true
+  },
+  {
+   "id": "k16",
+   "name": "Rambouillet (cilj)",
+   "km": 1220.0,
+   "gainM": 750,
+   "lossM": 750,
+   "closeH": 80.0,
+   "crew": true,
+   "stopType": "",
+   "stopMin": null,
+   "sleepMin": 0,
+   "foodKcal": 0,
+   "extraTasks": [],
+   "notes": "",
+   "placeholder": true
+  }
+ ]
+};
+const SCHEMA = 1;
+const TABS = [
+  ["pregled","Pregled"],["dogodek","Dogodek"],["kartica","Kartica"],["plan","Plan kontrol"],
+  ["kolesarja","Kolesarja"],["postanki","Postanki"],["prehrana","Prehrana"],["spanec","Spanec"],
+  ["roadto","Road to PBP"],["koledar","Koledar"],["podatki","Podatki"]
+];
+const DAYS = ["ned","pon","tor","sre","čet","pet","sob"];
+const MONTHS = ["januar","februar","marec","april","maj","junij","julij","avgust","september","oktober","november","december"];
+const clone = o => JSON.parse(JSON.stringify(o));
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const num = v => (v === null || v === "" || v === undefined || isNaN(+v)) ? 0 : +v;
+const uid = p => p + Math.random().toString(36).slice(2, 8);
+
+let D = clone(DEFAULT_DATA);
+const S = { tab: "pregled", edit: location.protocol === "file:", dirty: false, live: {}, calMonth: null, source: "vgrajeni privzeti podatki" };
+try { const l = localStorage.getItem("pbp-live"); if (l) S.live = JSON.parse(l); } catch (e) {}
+try { const h = location.hash.slice(1); if (TABS.some(t => t[0] === h)) S.tab = h; } catch (e) {}
+
+/* ---------- time helpers ---------- */
+function startDate() { return new Date(D.event.startDate + "T" + (D.event.startTime || "00:00")); }
+function clock(min) {
+  const d = new Date(startDate().getTime() + min * 60000);
+  if (isNaN(d)) return "–";
+  return DAYS[d.getDay()] + " " + String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0");
+}
+function dur(min) {
+  if (min == null || isNaN(min)) return "–";
+  const neg = min < 0; min = Math.abs(Math.round(min));
+  return (neg ? "−" : "") + Math.floor(min / 60) + ":" + String(min % 60).padStart(2, "0");
+}
+function fmtDate(iso) {
+  if (!iso) return "datum ni določen";
+  const d = new Date(iso + "T12:00");
+  return isNaN(d) ? iso : d.getDate() + ". " + (d.getMonth() + 1) + ". " + d.getFullYear();
+}
+function daysTo(iso) { const d = new Date(iso + "T00:00"); const t = new Date(); t.setHours(0,0,0,0); return Math.round((d - t) / 864e5); }
+
+/* ---------- physics ---------- */
+function powerAt(v, m, grade, cda) {
+  const p = D.physics, th = Math.atan(grade);
+  const F = m * 9.81 * (num(p.crr) * Math.cos(th) + Math.sin(th)) + 0.5 * num(p.rho) * cda * v * v;
+  return v * F / (1 - num(p.drivetrainLossPct) / 100);
+}
+function solveV(P, m, grade, cda) {
+  let lo = 0.3, hi = 30;
+  if (powerAt(hi, m, grade, cda) < P) return hi;
+  if (powerAt(lo, m, grade, cda) > P) return lo;
+  for (let i = 0; i < 50; i++) { const mid = (lo + hi) / 2; if (powerAt(mid, m, grade, cda) > P) hi = mid; else lo = mid; }
+  return (lo + hi) / 2;
+}
+function riderPhys(r) {
+  return { m: num(r.weightKg) + num(r.bikeKg), cda: (num(r.cda) || 0.35) * (1 - num(D.physics.draftPct) / 200) };
+}
+function pieces(d, gain, loss) {
+  const p = D.physics;
+  const gc = (num(p.climbGradePct) || 5) / 100, gd = (num(p.descentGradePct) || 5) / 100;
+  const cd = Math.min(gain / gc / 1000, d * 0.6);
+  const dd = Math.min(loss / gd / 1000, (d - cd) * 0.9);
+  const out = [];
+  if (cd > 0.001) out.push({ km: cd, g: gain / (cd * 1000), k: "climb" });
+  if (dd > 0.001) out.push({ km: dd, g: -loss / (dd * 1000), k: "desc" });
+  const fd = d - cd - dd; if (fd > 0.001) out.push({ km: fd, g: 0, k: "flat" });
+  return out;
+}
+/* pair rides together: on each piece the slower rider sets the speed; each rider's power is what that speed costs them */
+function segCalc(d, gain, loss, midKm) {
+  const p = D.physics, R = D.riders;
+  const fat = Math.max(0.6, 1 - num(p.fatiguePctPer100km) / 100 * midKm / 100);
+  const cal = (num(p.calibrationPct) || 100) / 100;
+  const ph = R.map(riderPhys);
+  let tSec = 0; const kJ = R.map(() => 0);
+  if (!R.length || d <= 0) return { tSec: 0, kJ };
+  for (const pc of pieces(d, gain, loss)) {
+    let v = Infinity;
+    R.forEach((r, i) => {
+      const pct = pc.k === "climb" ? r.pctClimb : pc.k === "desc" ? r.pctDescent : r.pctFlat;
+      v = Math.min(v, solveV(num(r.ftpW) * num(pct) / 100 * fat, ph[i].m, pc.g, ph[i].cda));
+    });
+    if (pc.k === "desc") v = Math.min(v, (num(p.maxDescentKmh) || 50) / 3.6);
+    const t = pc.km * 1000 / (v * cal);
+    tSec += t;
+    R.forEach((r, i) => { kJ[i] += Math.max(0, powerAt(v, ph[i].m, pc.g, ph[i].cda)) * t / 1000; });
+  }
+  return { tSec, kJ };
+}
+function kcalFromKJ(kj) { return kj / (4.184 * ((num(D.physics.efficiencyPct) || 23) / 100)); }
+
+/* ---------- plan ---------- */
+function stopType(id) { return D.stopTypes.find(s => s.id === id); }
+function stopMinutes(c) { if (c.stopMin !== null && c.stopMin !== "" && c.stopMin !== undefined) return num(c.stopMin); const t = stopType(c.stopType); return t ? num(t.minutes) : 0; }
+function plan() {
+  const C = D.controls, N = D.nutrition, R = D.riders;
+  const rows = []; let t = 0, ridingMin = 0, stopTot = 0, sleepTot = 0;
+  const out = R.map(() => 0), inn = R.map(() => 0), bal = R.map(() => [[0, 0]]), cur = R.map(() => 0);
+  C.forEach((c, i) => {
+    let seg = null;
+    if (i > 0) {
+      const d = Math.max(0, num(c.km) - num(C[i - 1].km));
+      const s = segCalc(d, num(c.gainM), num(c.lossM), (num(c.km) + num(C[i - 1].km)) / 2);
+      const m = s.tSec / 60;
+      seg = { d, min: m, speed: m > 0 ? d / (m / 60) : 0, kcal: s.kJ.map(kcalFromKJ) };
+      R.forEach((r, ri) => {
+        const o = seg.kcal[ri], ii = num(N.intakeKcalPerH) * m / 60;
+        out[ri] += o; inn[ri] += ii; cur[ri] += ii - o; bal[ri].push([t + m, cur[ri]]);
+      });
+      t += m; ridingMin += m;
+    }
+    const planned = t;
+    const hasActual = S.live[c.id] != null;
+    if (hasActual) t = S.live[c.id];
+    const last = i === C.length - 1;
+    const stop = last || i === 0 ? 0 : stopMinutes(c);
+    const sleep = last || i === 0 ? 0 : num(c.sleepMin);
+    const close = (c.closeH === null || c.closeH === "" || c.closeH === undefined) ? null : num(c.closeH) * 60;
+    R.forEach((r, ri) => {
+      const o = (stop + sleep) * num(N.restKcalPerMin), ii = num(c.foodKcal);
+      out[ri] += o; inn[ri] += ii; cur[ri] += ii - o; bal[ri].push([t + stop + sleep, cur[ri]]);
+    });
+    rows.push({ c, i, seg, planned, arr: t, hasActual, stop, sleep, dep: t + stop + sleep, close, buffer: close != null ? close - t : null, last });
+    stopTot += stop; sleepTot += sleep;
+    t += stop + sleep;
+  });
+  const finish = rows.length ? rows[rows.length - 1].arr : 0;
+  return { rows, finish, ridingMin, stopTot, sleepTot, out, inn, bal, limit: num(D.event.timeLimitH) * 60 };
+}
+function sleepInfo(P) {
+  const blocks = P.rows.filter(r => r.sleep > 0).map(r => ({ start: r.arr + r.stop, end: r.dep, r }));
+  let wake = -num(D.sleep.awakeBeforeStartH) * 60, longest = 0;
+  blocks.forEach(b => { longest = Math.max(longest, b.start - wake); wake = b.end; });
+  longest = Math.max(longest, P.finish - wake);
+  let night = 0;
+  P.rows.forEach(r => { if (r.seg) { const s = r.arr - r.seg.min; for (let m = s; m < r.arr; m += 5) { const h = new Date(startDate().getTime() + m * 60000).getHours(); if (h >= 22 || h < 6) night += Math.min(5, r.arr - m); } } });
+  return { blocks, longest, night };
+}
+
+/* ---------- path binding ---------- */
+function getPath(path) { return path.split(".").reduce((o, k) => o == null ? o : o[k], D); }
+function setPath(path, val) {
+  const ks = path.split("."); let o = D;
+  for (let i = 0; i < ks.length - 1; i++) o = o[ks[i]];
+  o[ks[ks.length - 1]] = val;
+}
+function inp(path, type = "text", extra = "") {
+  const v = getPath(path);
+  if (type === "check") return `<input type="checkbox" data-path="${path}" data-type="bool" ${v ? "checked" : ""} ${extra}>`;
+  if (type === "area") return `<textarea data-path="${path}" ${extra}>${esc(v)}</textarea>`;
+  if (type === "lines") return `<textarea data-path="${path}" data-type="lines" ${extra}>${esc((v || []).join("\n"))}</textarea>`;
+  const dt = type === "number" ? ' data-type="num" step="any" inputmode="decimal"' : "";
+  return `<input type="${type}" data-path="${path}"${dt} value="${esc(v ?? "")}" ${extra}>`;
+}
+function fld(label, path, type, extra) { return `<div class="field"><label>${label}</label>${inp(path, type, extra)}</div>`; }
+function sel(path, options, extra = "") {
+  const v = getPath(path);
+  return `<select data-path="${path}" ${extra}>${options.map(([k, l]) => `<option value="${esc(k)}" ${k === v ? "selected" : ""}>${esc(l)}</option>`).join("")}</select>`;
+}
+
+/* ---------- views ---------- */
+const V = {};
+
+V.pregled = () => {
+  const P = plan(), si = sleepInfo(P), dt = daysTo(D.event.startDate);
+  const q = qualStatus();
+  const minBuf = P.rows.filter(r => r.buffer != null && r.i > 0).reduce((a, r) => Math.min(a, r.buffer), Infinity);
+  const next = keyDates().filter(k => k.date && daysTo(k.date) >= 0).sort((a, b) => a.date.localeCompare(b.date)).slice(0, 5);
+  return `
+  <section class="hero">
+    <div class="days">${dt >= 0 ? dt : "—"}<small>dni do štarta</small></div>
+    <div><p>${esc(D.event.name)}, ${esc(D.event.edition)}</p>
+    <p>Štart ${fmtDate(D.event.startDate)} ob ${esc(D.event.startTime)}, ${esc(D.event.startPlace)}. Skupina ${esc(D.event.group)}.</p>
+    ${D.controls.some(c => c.placeholder) ? `<p><span class="flag" style="margin:0">kontrole so začasne, uradna trasa še ni objavljena</span></p>` : ""}</div>
+  </section>
+  <div class="stats">
+    <div class="stat"><b>${dur(P.finish)}</b><span>predviden skupni čas</span></div>
+    <div class="stat"><b>${dur(P.limit - P.finish)}</b><span>rezerva do ${num(D.event.timeLimitH)} h</span></div>
+    <div class="stat"><b>${dur(P.ridingMin)}</b><span>čas vožnje</span></div>
+    <div class="stat"><b>${dur(P.sleepTot)}</b><span>spanje</span></div>
+    <div class="stat"><b>${isFinite(minBuf) ? dur(minBuf) : "–"}</b><span>najmanjša rezerva na kontroli</span></div>
+    <div class="stat"><b>${dur(si.longest)}</b><span>najdaljše obdobje brez spanja</span></div>
+  </div>
+  <div class="grid">
+    <div class="box"><h3 style="margin-top:0">Kvalifikacija 2027</h3>
+      <div class="qual">${[200,300,400,600].map(k => `<div class="${q[k] ? "done" : ""}">${k}<small>${q[k] ? "opravljen" : "manjka"}</small></div>`).join("")}</div>
+      <p class="note">Brevet 2026 za predprijavo: ${q.pre ? `opravljen${q.pre.homologation ? ", homologacija " + esc(q.pre.homologation) : ", <b>manjka homologacijska številka</b>"}` : "še ni opravljen"}.</p>
+    </div>
+    <div class="box"><h3 style="margin-top:0">Naslednji roki</h3>
+      <ul class="clean">${next.map(k => `<li><b>${fmtDate(k.date)}</b> ${esc(k.title)} <span class="note">(čez ${daysTo(k.date)} dni)</span></li>`).join("") || "<li>Ni prihajajočih rokov.</li>"}</ul>
+    </div>
+    <div class="box"><h3 style="margin-top:0">Energija (kolesar 1)</h3>
+      ${D.riders[0] ? `<div class="stats" style="margin:0"><div class="stat"><b>${Math.round(P.out[0]).toLocaleString("sl")}</b><span>kcal porabe</span></div>
+      <div class="stat"><b>${Math.round(P.inn[0] - P.out[0]).toLocaleString("sl")}</b><span>bilanca kcal</span></div></div>` : ""}
+    </div>
+  </div>`;
+};
+
+V.dogodek = () => {
+  const e = "event", r = "event.registration";
+  return `<h2>Dogodek</h2>
+  <div class="box"><div class="fields">
+    ${fld("Ime", e + ".name")}${fld("Izvedba", e + ".edition")}${fld("Kraj štarta", e + ".startPlace")}
+    ${fld("Datum štarta", e + ".startDate", "date")}${fld("Ura štarta skupine", e + ".startTime", "time")}
+    ${fld("Skupina", e + ".group")}${fld("Časovni limit (h)", e + ".timeLimitH", "number")}
+    ${fld("Razdalja (km)", e + ".distanceKm", "number")}${fld("Višinci (m)", e + ".elevationM", "number")}
+  </div></div>
+  <h3>Prijava</h3>
+  <div class="box"><div class="fields">
+    ${fld("Predprijava od (približno)", r + ".preRegFrom", "date")}${fld("Končna prijava od", r + ".finalFrom", "date")}
+    ${fld("Končna prijava do", r + ".finalTo", "date")}${fld("Vračilo prijavnine do", r + ".refundUntil", "date")}
+    ${fld("Status prijave", r + ".status")}${fld("Štartni termin", r + ".departureSlot")}${fld("Številka okvirja", r + ".frameNumber")}
+    <div class="field"><label>Avtodom prijavljen ob registraciji</label>${inp(r + ".crewDeclared", "check")}</div>
+  </div></div>
+  <h3>Pravila, ki vplivajo na plan</h3>
+  <div class="box">${S.edit ? inp("event.rules", "lines", 'style="min-height:10rem"') : `<ul class="clean">${D.event.rules.map(x => `<li>${esc(x)}</li>`).join("")}</ul>`}</div>
+  <h3>Povezave</h3>
+  <div class="box"><ul class="clean">${D.event.links.map((l, i) => `<li class="row">${S.edit ? `<input data-path="event.links.${i}.label" value="${esc(l.label)}" style="max-width:14rem"><input data-path="event.links.${i}.url" value="${esc(l.url)}"><button class="btn small danger" data-act="del" data-arr="event.links" data-i="${i}">Odstrani</button>` : `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`}</li>`).join("")}</ul>
+  <button class="btn small edit-only" data-act="add-link" style="margin-top:.5rem">Dodaj povezavo</button></div>
+  <h3>Opombe</h3><div class="box">${inp("event.notes", "area")}</div>`;
+};
+
+V.kartica = () => {
+  const P = plan();
+  const anyLive = Object.keys(S.live).length > 0;
+  return `<h2>Kartica</h2>
+  <p class="lead">Pogled za dogodek. Ob prihodu na kontrolo vpiši dejanski čas: vse naslednje kontrole se preračunajo. Dejanski časi ostanejo samo na tej napravi.</p>
+  ${anyLive ? `<p><button class="btn small danger" data-act="clear-live">Počisti dejanske čase</button></p>` : ""}
+  <div class="card-grid">${P.rows.map(r => ctlCard(r)).join("")}</div>`;
+};
+function ctlCard(r) {
+  const c = r.c, t = stopType(c.stopType);
+  const tasks = [...(t ? t.tasks : []), ...(c.extraTasks || [])];
+  const bufCls = r.buffer == null ? "mid" : r.buffer < 30 ? "bad" : r.buffer < 120 ? "mid" : "ok";
+  const liveVal = r.hasActual ? toLocalInput(S.live[c.id]) : "";
+  return `<article class="ctl ${r.hasActual ? "passed" : ""}">
+    <span class="no">${r.i}</span>
+    ${r.hasActual ? `<div class="stampmark"><small>žig</small>${clock(r.arr).split(" ")[1]}<small>${clock(r.arr).split(" ")[0]}</small></div>` : ""}
+    <h3>${esc(c.name)}${c.placeholder ? '<span class="flag">začasno</span>' : ""}</h3>
+    <div class="km">${num(c.km)} km${r.seg ? `, odsek ${Math.round(r.seg.d)} km, ${Math.round(r.seg.speed * 10) / 10} km/h` : ""}</div>
+    <div class="times">
+      <div><b>${clock(r.arr)}</b><span>${r.i === 0 ? "štart" : r.hasActual ? "dejanski prihod" : "plan prihoda"}</span></div>
+      ${r.close != null && r.i > 0 ? `<div><b>${clock(r.close)}</b><span>zapre</span></div>` : ""}
+    </div>
+    ${r.buffer != null && r.i > 0 ? `<span class="badge ${bufCls}">rezerva ${dur(r.buffer)}</span>` : ""}
+    ${r.i > 0 && !r.last ? `<span class="crew ${c.crew ? "" : "no"}" style="margin-left:.5rem">${c.crew ? "avtodom: da" : "avtodom: NE"}</span>` : ""}
+    ${r.stop || r.sleep ? `<div class="note" style="margin-top:.4rem">${t ? esc(t.name) : "Postanek"} ${dur(r.stop)}${r.sleep ? `, spanje ${dur(r.sleep)}` : ""}, odhod ${clock(r.dep)}</div>` : ""}
+    ${tasks.length && !r.last ? `<ul>${tasks.map(x => `<li><label><input type="checkbox" class="live">${esc(x)}</label></li>`).join("")}</ul>` : ""}
+    ${(t && t.food) || num(c.foodKcal) ? `<div class="food">${t && t.food ? esc(t.food) : ""}${num(c.foodKcal) ? ` <span class="note">(~${num(c.foodKcal)} kcal)</span>` : ""}</div>` : ""}
+    ${c.notes ? `<div class="note" style="margin-top:.4rem">${esc(c.notes)}</div>` : ""}
+    ${r.i > 0 ? `<div class="live"><input type="datetime-local" class="live" data-live="${c.id}" value="${liveVal}" aria-label="Dejanski prihod ${esc(c.name)}">${r.hasActual ? `<button class="btn small live" data-act="unlive" data-id="${c.id}">×</button>` : ""}</div>` : ""}
+  </article>`;
+}
+function toLocalInput(min) {
+  const d = new Date(startDate().getTime() + min * 60000); const p = n => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;
+}
+
+V.plan = () => {
+  const P = plan();
+  const stOpts = [["", "—"], ...D.stopTypes.map(s => [s.id, s.name])];
+  const late = P.rows.filter(r => r.buffer != null && r.buffer < 0 && r.i > 0);
+  return `<h2>Plan kontrol</h2>
+  <p class="lead">Vsaka vrstica je kontrola. Višinci in spust veljajo za odsek od prejšnje kontrole. Prazen čas postanka vzame privzeto vrednost tipa postanka. Zapiranje je v urah od štarta skupine.</p>
+  ${late.length ? `<p><span class="badge bad">Zamuda na ${late.length} kontrolah: ${late.map(r => esc(r.c.name)).join(", ")}</span></p>` : ""}
+  <div class="stats"><div class="stat"><b>${dur(P.finish)}</b><span>skupaj</span></div><div class="stat"><b>${dur(P.ridingMin)}</b><span>vožnja</span></div><div class="stat"><b>${dur(P.stopTot)}</b><span>postanki</span></div><div class="stat"><b>${dur(P.sleepTot)}</b><span>spanje</span></div><div class="stat"><b>${P.ridingMin ? Math.round(num(D.controls.at(-1)?.km) / (P.ridingMin / 60) * 10) / 10 : 0}</b><span>km/h v vožnji</span></div></div>
+  <div class="scroll"><table class="t">
+  <thead><tr><th>#</th><th>Kontrola</th><th>km</th><th>↑ m</th><th>↓ m</th><th>Zapre (h)</th><th>Avtodom</th><th>Tip postanka</th><th>Postanek (min)</th><th>Spanje (min)</th><th>Hrana kcal</th><th>Odsek</th><th>km/h</th><th>Prihod</th><th>Rezerva</th><th class="edit-only"></th></tr></thead>
+  <tbody>${P.rows.map(r => { const i = r.i, p = "controls." + i, c = r.c; return `<tr class="${c.placeholder ? "ph" : ""}">
+    <td>${i}</td><td class="w">${inp(p + ".name")}</td><td>${inp(p + ".km", "number")}</td>
+    <td>${inp(p + ".gainM", "number")}</td><td>${inp(p + ".lossM", "number")}</td><td>${inp(p + ".closeH", "number")}</td>
+    <td style="text-align:center">${inp(p + ".crew", "check")}</td><td>${sel(p + ".stopType", stOpts)}</td>
+    <td>${inp(p + ".stopMin", "number", `placeholder="${stopType(c.stopType)?.minutes ?? ""}"`)}</td><td>${inp(p + ".sleepMin", "number")}</td><td>${inp(p + ".foodKcal", "number")}</td>
+    <td class="num">${r.seg ? dur(r.seg.min) : ""}</td><td class="num">${r.seg ? (Math.round(r.seg.speed * 10) / 10) : ""}</td>
+    <td class="num">${clock(r.arr)}</td><td>${r.buffer != null && i > 0 ? `<span class="badge ${r.buffer < 0 ? "bad" : r.buffer < 120 ? "mid" : "ok"}">${dur(r.buffer)}</span>` : ""}</td>
+    <td class="edit-only"><button class="btn small danger" data-act="del" data-arr="controls" data-i="${i}" aria-label="Odstrani">×</button></td></tr>`; }).join("")}</tbody></table></div>
+  <div class="row edit-only" style="margin-top:.75rem"><button class="btn small" data-act="add-ctl">Dodaj kontrolo</button>
+  <button class="btn small" data-act="unflag">Označi kontrole kot uradne</button></div>
+  <h3>Dodatna opravila in opombe po kontrolah</h3>
+  <div class="grid">${D.controls.map((c, i) => i === 0 ? "" : `<div class="box"><b>${esc(c.name)}</b>
+    <div class="field" style="margin-top:.4rem"><label>Dodatna opravila (vsako v svojo vrstico)</label>${inp("controls." + i + ".extraTasks", "lines")}</div>
+    <div class="field"><label>Opombe</label>${inp("controls." + i + ".notes", "area")}</div></div>`).join("")}</div>`;
+};
+
+V.kolesarja = () => {
+  const ph = "physics";
+  return `<h2>Kolesarja</h2>
+  <p class="lead">Hitrost odseka se izračuna iz moči (% FTP), mase in aerodinamike. Ker vozita skupaj, na vsakem delu odseka velja hitrost počasnejšega. Model brez kalibracije je optimističen: nastavi faktor realnosti na podlagi brevetov (zavihek Road to PBP).</p>
+  <div class="grid">${D.riders.map((r, i) => { const p = "riders." + i; const m = num(r.weightKg) + num(r.bikeKg); return `<div class="box">
+    <div class="fields">${fld("Ime", p + ".name")}${fld("Teža (kg)", p + ".weightKg", "number")}${fld("Kolo + prtljaga (kg)", p + ".bikeKg", "number")}
+    ${fld("FTP (W)", p + ".ftpW", "number")}${fld("Ravnina (% FTP)", p + ".pctFlat", "number")}${fld("Vzpon (% FTP)", p + ".pctClimb", "number")}
+    ${fld("Spust (% FTP)", p + ".pctDescent", "number")}${fld("CdA (m²)", p + ".cda", "number")}</div>
+    <p class="note">${num(r.weightKg) ? (Math.round(num(r.ftpW) / num(r.weightKg) * 100) / 100) + " W/kg" : ""}, sistem ${m} kg, ravnina ${Math.round(num(r.ftpW) * num(r.pctFlat) / 100)} W, vzpon ${Math.round(num(r.ftpW) * num(r.pctClimb) / 100)} W</p>
+    ${fld("Opombe", p + ".notes", "area")}</div>`; }).join("")}</div>
+  <h3>Fizika in predpostavke</h3>
+  <div class="box"><div class="fields">
+    ${fld("Kotalni upor Crr", ph + ".crr", "number")}${fld("Gostota zraka (kg/m³)", ph + ".rho", "number")}${fld("Izguba pogona (%)", ph + ".drivetrainLossPct", "number")}
+    ${fld("Tipičen naklon vzponov (%)", ph + ".climbGradePct", "number")}${fld("Tipičen naklon spustov (%)", ph + ".descentGradePct", "number")}${fld("Najvišja hitrost spusta (km/h)", ph + ".maxDescentKmh", "number")}
+    ${fld("Zavetrje za zadnjim (% manj CdA)", ph + ".draftPct", "number")}${fld("Padec moči (% na 100 km)", ph + ".fatiguePctPer100km", "number")}${fld("Mehanska učinkovitost (%)", ph + ".efficiencyPct", "number")}
+    ${fld("Faktor realnosti (%)", ph + ".calibrationPct", "number")}
+  </div>
+  <p class="note">Zavetrje se razdeli na pol, ker se menjavata. Padec moči ima spodnjo mejo 60 %. Faktor realnosti pod 100 upočasni vse odseke (veter, promet, gneča).</p></div>`;
+};
+
+V.postanki = () => `<h2>Postanki</h2>
+  <p class="lead">Tipi postankov z opravili in hrano. Vsaki kontroli v Planu določiš tip, opravila se prikažejo na Kartici.</p>
+  <div class="grid">${D.stopTypes.map((s, i) => { const p = "stopTypes." + i; return `<div class="box">
+    <div class="fields">${fld("Ime", p + ".name")}${fld("Privzeto trajanje (min)", p + ".minutes", "number")}</div>
+    ${fld("Hrana", p + ".food", "area")}${fld("Opravila (vsako v svojo vrstico)", p + ".tasks", "lines", 'style="min-height:8rem"')}
+    <p class="note">Uporabljeno na ${D.controls.filter(c => c.stopType === s.id).length} kontrolah. ID: ${esc(s.id)}</p>
+    <button class="btn small danger edit-only" data-act="del" data-arr="stopTypes" data-i="${i}">Odstrani tip</button></div>`; }).join("")}</div>
+  <p class="edit-only"><button class="btn small" data-act="add-stop">Dodaj tip postanka</button></p>`;
+
+V.prehrana = () => {
+  const P = plan(), N = "nutrition";
+  const ser = P.bal.map((b, i) => ({ name: D.riders[i]?.name || "?", pts: b }));
+  return `<h2>Prehrana</h2>
+  <p class="lead">Poraba iz mehanskega dela (kJ) in izkoristka, plus mirovanje med postanki. Vnos je vnos na uro vožnje plus hrana na kontrolah.</p>
+  <div class="box"><div class="fields">
+    ${fld("Vnos med vožnjo (kcal/h)", N + ".intakeKcalPerH", "number")}${fld("Ogljikovi hidrati (g/h)", N + ".carbGPerH", "number")}
+    ${fld("Tekočina (ml/h)", N + ".fluidMlPerH", "number")}${fld("Poraba med mirovanjem (kcal/min)", N + ".restKcalPerMin", "number")}
+  </div>${fld("Opombe", N + ".notes", "area")}</div>
+  <div class="stats">${D.riders.map((r, i) => `<div class="stat"><b>${Math.round(P.out[i]).toLocaleString("sl")}</b><span>${esc(r.name)}: poraba kcal</span></div><div class="stat"><b>${Math.round(P.inn[i] - P.out[i]).toLocaleString("sl")}</b><span>${esc(r.name)}: bilanca</span></div>`).join("")}
+  <div class="stat"><b>${Math.round(num(D.nutrition.carbGPerH) * P.ridingMin / 60 / 1000 * 10) / 10} kg</b><span>OH med vožnjo</span></div>
+  <div class="stat"><b>${Math.round(num(D.nutrition.fluidMlPerH) * P.ridingMin / 60 / 1000)} l</b><span>tekočine med vožnjo</span></div></div>
+  <h3>Kumulativna energijska bilanca</h3>
+  <div class="box">${lineChart(ser, P.finish)}</div>
+  <h3>Po odsekih</h3>
+  <div class="scroll"><table class="t"><thead><tr><th>Do kontrole</th><th>Odsek</th>${D.riders.map(r => `<th>${esc(r.name)} kcal</th>`).join("")}<th>Vnos med vožnjo</th><th>OH (g)</th><th>Na kontroli</th><th>Hrana</th></tr></thead>
+  <tbody>${P.rows.filter(r => r.seg).map(r => { const t = stopType(r.c.stopType); return `<tr><td>${esc(r.c.name)}</td><td class="num">${dur(r.seg.min)}</td>${r.seg.kcal.map(k => `<td class="num">${Math.round(k)}</td>`).join("")}<td class="num">${Math.round(num(D.nutrition.intakeKcalPerH) * r.seg.min / 60)}</td><td class="num">${Math.round(num(D.nutrition.carbGPerH) * r.seg.min / 60)}</td><td class="num">${num(r.c.foodKcal)}</td><td>${t ? esc(t.food) : ""}</td></tr>`; }).join("")}</tbody></table></div>`;
+};
+function lineChart(series, maxMin) {
+  const W = 720, H = 240, L = 52, B = 26, T = 10, Rt = 10;
+  const all = series.flatMap(s => s.pts.map(p => p[1])).concat([0]);
+  let lo = Math.min(...all), hi = Math.max(...all); if (hi - lo < 100) hi = lo + 100;
+  const pad = (hi - lo) * 0.08; lo -= pad; hi += pad;
+  const xm = Math.max(60, maxMin);
+  const x = m => L + (W - L - Rt) * m / xm, y = v => T + (H - T - B) * (hi - v) / (hi - lo);
+  const cols = ["var(--ride)", "var(--stamp)", "var(--ok)"];
+  let g = "";
+  const step = Math.pow(10, Math.floor(Math.log10((hi - lo) / 4))) * (((hi - lo) / 4) / Math.pow(10, Math.floor(Math.log10((hi - lo) / 4))) > 5 ? 5 : ((hi - lo) / 4) / Math.pow(10, Math.floor(Math.log10((hi - lo) / 4))) > 2 ? 2 : 1);
+  for (let v = Math.ceil(lo / step) * step; v <= hi; v += step) g += `<line x1="${L}" x2="${W - Rt}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" ${v === 0 ? 'stroke-width="2"' : ""}/><text x="${L - 6}" y="${y(v) + 4}" text-anchor="end">${Math.round(v)}</text>`;
+  for (let h = 0; h <= xm / 60; h += 10) g += `<text x="${x(h * 60)}" y="${H - 6}" text-anchor="middle">${h} h</text>`;
+  const lines = series.map((s, i) => `<polyline fill="none" stroke="${cols[i % 3]}" stroke-width="2" points="${s.pts.map(p => x(p[0]).toFixed(1) + "," + y(p[1]).toFixed(1)).join(" ")}"/>`).join("");
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Energijska bilanca v kcal skozi čas">${g}${lines}</svg>
+  <div class="legend">${series.map((s, i) => `<span><i style="background:${cols[i % 3]}"></i>${esc(s.name)}</span>`).join("")}<span>kcal, pod ničlo = primanjkljaj</span></div>`;
+}
+
+V.spanec = () => {
+  const P = plan(), si = sleepInfo(P);
+  return `<h2>Spanec</h2>
+  <p class="lead">Spanje določiš v Planu kontrol (stolpec Spanje). Kjer avtodoma ni, spita v spalnici kontrole.</p>
+  <div class="box"><div class="fields">${fld("Budna pred štartom (h)", "sleep.awakeBeforeStartH", "number")}</div>${fld("Opombe", "sleep.notes", "area")}</div>
+  <div class="stats">
+    <div class="stat"><b>${dur(P.sleepTot)}</b><span>skupaj spanja</span></div>
+    <div class="stat"><b>${si.blocks.length}</b><span>blokov spanja</span></div>
+    <div class="stat"><b>${dur(si.longest)}</b><span>najdaljše budno obdobje (vključno pred štartom)</span></div>
+    <div class="stat"><b>${dur(si.night)}</b><span>vožnje ponoči (22–06)</span></div>
+  </div>
+  <h3>Časovnica</h3>
+  <div class="box">${timeline(P)}</div>
+  <h3>Bloki spanja</h3>
+  <div class="box"><ul class="clean">${si.blocks.map(b => `<li><b>${esc(b.r.c.name)}</b> (${num(b.r.c.km)} km): ${clock(b.start)} do ${clock(b.end)}, ${dur(b.end - b.start)}. ${b.r.c.crew ? "V avtodomu." : '<span class="crew no">Brez avtodoma: spalnica kontrole.</span>'}</li>`).join("") || "<li>Ni načrtovanega spanja.</li>"}</ul></div>`;
+};
+function timeline(P) {
+  const W = 720, H = 92, L = 22, Rt = 22, xm = Math.max(P.finish, num(D.event.timeLimitH) * 60);
+  const x = m => L + (W - L - Rt) * m / xm;
+  let g = "";
+  for (let m = 0; m < xm; m += 30) { const h = new Date(startDate().getTime() + m * 60000).getHours(); if (h >= 22 || h < 6) g += `<rect x="${x(m)}" y="0" width="${x(m + 30) - x(m) + .5}" height="62" fill="var(--night)"/>`; }
+  P.rows.forEach(r => {
+    if (r.seg) g += `<rect x="${x(r.arr - r.seg.min)}" y="20" width="${Math.max(.5, x(r.arr) - x(r.arr - r.seg.min))}" height="22" fill="var(--ride)"/>`;
+    if (r.stop) g += `<rect x="${x(r.arr)}" y="20" width="${x(r.arr + r.stop) - x(r.arr)}" height="22" fill="var(--stop)"/>`;
+    if (r.sleep) g += `<rect x="${x(r.arr + r.stop)}" y="12" width="${x(r.dep) - x(r.arr + r.stop)}" height="38" fill="var(--sleep)"/>`;
+  });
+  g += `<line x1="${x(num(D.event.timeLimitH) * 60)}" x2="${x(num(D.event.timeLimitH) * 60)}" y1="0" y2="62" stroke="var(--stamp)" stroke-dasharray="3 3"/>`;
+  for (let h = 0; h <= xm / 60; h += 10) g += `<text x="${x(h * 60)}" y="78" text-anchor="middle">${h} h</text>`;
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Časovnica vožnje, postankov in spanja">${g}</svg>
+  <div class="legend"><span><i style="background:var(--ride)"></i>vožnja</span><span><i style="background:var(--stop)"></i>postanek</span><span><i style="background:var(--sleep)"></i>spanje</span><span><i style="background:var(--night)"></i>noč 22–06</span><span>črtkano: limit</span></div>`;
+}
+
+function qualStatus() {
+  const q = {};
+  [200, 300, 400, 600].forEach(k => q[k] = D.brevets.some(b => num(b.season) === 2027 && b.status === "opravljen" && num(b.distance) >= k && num(b.distance) < (k === 600 ? 1e9 : k + 100)));
+  q.pre = D.brevets.filter(b => num(b.season) === 2026 && b.status === "opravljen").sort((a, b) => num(b.distance) - num(a.distance))[0];
+  return q;
+}
+function modelMovingMin(b) { const d = num(b.distance); if (!d) return null; return segCalc(d, num(b.elevationM), num(b.elevationM), d / 2).tSec / 60; }
+
+V.roadto = () => {
+  const q = qualStatus();
+  const cal = D.brevets.filter(b => b.status === "opravljen" && num(b.movingTimeH) && num(b.distance)).map(b => ({ b, model: modelMovingMin(b), act: num(b.movingTimeH) * 60 }));
+  const sugg = cal.length ? Math.round(cal.reduce((a, c) => a + c.model / c.act, 0) / cal.length * num(D.physics.calibrationPct || 100)) : null;
+  return `<h2>Road to PBP</h2>
+  <p class="lead">Kvalifikacijski breveti in opažanja. Opravljeni breveti z vnesenim časom vožnje in višinci kalibrirajo model hitrosti.</p>
+  <div class="qual" style="max-width:520px;margin-bottom:1rem">${[200,300,400,600].map(k => `<div class="${q[k] ? "done" : ""}">${k}<small>${q[k] ? "opravljen" : "manjka"}</small></div>`).join("")}</div>
+  ${cal.length ? `<div class="box" style="margin-bottom:1rem"><b>Kalibracija modela</b><ul class="clean">${cal.map(c => `<li>${esc(c.b.name)}: model ${dur(c.model)}, dejansko ${dur(c.act)} (${Math.round(c.model / c.act * 100)} %)</li>`).join("")}</ul>
+    <p class="note">Predlagan faktor realnosti: <b>${sugg} %</b> (trenutno ${num(D.physics.calibrationPct)} %). ${S.edit ? `<button class="btn small" data-act="apply-cal" data-v="${sugg}">Uporabi</button>` : ""}</p></div>` : ""}
+  ${D.brevets.map((b, i) => { const p = "brevets." + i; return `<details class="box brev" ${b.status !== "opravljen" || S.edit ? "open" : ""}>
+    <summary>${esc(b.name || "Brevet")} <span class="badge ${b.status === "opravljen" ? "ok" : b.status === "odpovedan" ? "bad" : "mid"}">${esc(b.status)}</span><span class="note">${fmtDate(b.date)}, sezona ${esc(b.season)}</span></summary>
+    <div class="fields" style="margin-top:.75rem">${fld("Ime", p + ".name")}${fld("Datum", p + ".date", "date")}
+      <div class="field"><label>Sezona</label>${sel(p + ".season", [[2026, "2026"], [2027, "2027"]].map(([k, l]) => [k, l]))}</div>
+      <div class="field"><label>Status</label>${sel(p + ".status", [["planiran", "planiran"], ["prijavljen", "prijavljen"], ["opravljen", "opravljen"], ["odpovedan", "odpovedan"]])}</div>
+      ${fld("Razdalja (km)", p + ".distance", "number")}${fld("Višinci (m)", p + ".elevationM", "number")}${fld("Organizator", p + ".organizer")}${fld("Homologacijska št.", p + ".homologation")}
+      ${fld("Čas vožnje (h)", p + ".movingTimeH", "number")}${fld("Skupni čas (h)", p + ".totalTimeH", "number")}${fld("Povprečna moč (W)", p + ".avgPowerW", "number")}</div>
+    <div class="fields" style="margin-top:.6rem">${fld("Prehrana", p + ".obsFood", "area")}${fld("Oprema", p + ".obsGear", "area")}${fld("Spanec in utrujenost", p + ".obsSleep", "area")}${fld("Težave in spremembe za PBP", p + ".obsIssues", "area")}</div>
+    <p class="edit-only"><button class="btn small danger" data-act="del" data-arr="brevets" data-i="${i}">Odstrani brevet</button></p></details>`; }).join("")}
+  <p class="edit-only"><button class="btn small" data-act="add-brevet">Dodaj brevet</button></p>`;
+};
+/* season select values are numbers; normalise */
+function keyDates() {
+  const r = D.event.registration, out = [];
+  out.push({ date: r.preRegFrom, title: "Predprijava se odpira (postopoma)", type: "deadline" });
+  out.push({ date: r.finalFrom, title: "Končna prijava se odpre", type: "deadline" });
+  out.push({ date: r.refundUntil, title: "Zadnji dan za vračilo prijavnine", type: "deadline" });
+  out.push({ date: r.finalTo, title: "Končna prijava se zapre", type: "deadline" });
+  out.push({ date: D.event.startDate, title: "Štart PBP " + (D.event.startTime || ""), type: "event" });
+  D.brevets.forEach(b => b.date && out.push({ date: b.date, title: b.name, type: "brevet" }));
+  D.calendar.forEach(c => c.date && out.push({ date: c.date, title: c.title, type: c.type || "event" }));
+  return out;
+}
+
+V.koledar = () => {
+  const now = new Date();
+  if (!S.calMonth) S.calMonth = [now.getFullYear(), now.getMonth()];
+  const [Y, M] = S.calMonth, first = new Date(Y, M, 1), off = (first.getDay() + 6) % 7;
+  const kd = keyDates(), todayIso = iso(now);
+  let cells = "";
+  for (let i = 0; i < 42; i++) {
+    const d = new Date(Y, M, 1 - off + i), di = iso(d);
+    const evs = kd.filter(k => k.date === di);
+    cells += `<div class="d ${d.getMonth() !== M ? "out" : ""} ${di === todayIso ? "today" : ""}"><span class="n">${d.getDate()}</span>${evs.map(e => `<span class="ev ${e.type}" title="${esc(e.title)}">${esc(e.title)}</span>`).join("")}</div>`;
+  }
+  const up = kd.filter(k => k.date && k.date >= todayIso).sort((a, b) => a.date.localeCompare(b.date));
+  return `<h2>Koledar</h2>
+  <div class="row" style="margin-bottom:.6rem"><button class="btn small" data-act="cal" data-d="-1" aria-label="Prejšnji mesec">‹</button><b style="font:700 1.2rem var(--cond);min-width:10rem;text-align:center">${MONTHS[M]} ${Y}</b><button class="btn small" data-act="cal" data-d="1" aria-label="Naslednji mesec">›</button><button class="btn small" data-act="cal-today">Danes</button><button class="btn small" data-act="cal-pbp">Avgust 2027</button></div>
+  <div class="cal">${["pon","tor","sre","čet","pet","sob","ned"].map(d => `<div class="h">${d}</div>`).join("")}${cells}</div>
+  <div class="legend" style="margin-top:.5rem"><span><i style="background:var(--hivis)"></i>brevet</span><span><i style="background:var(--stamp)"></i>rok</span><span><i style="background:var(--ink)"></i>dogodek</span></div>
+  <h3>Prihajajoče</h3><div class="box"><ul class="clean">${up.map(k => `<li><b>${fmtDate(k.date)}</b> ${esc(k.title)}</li>`).join("") || "<li>Ni vnosov.</li>"}</ul></div>
+  <h3>Lastni vnosi</h3>
+  <div class="box">${D.calendar.length ? D.calendar.map((c, i) => `<div class="row" style="margin-bottom:.4rem">${inp("calendar." + i + ".date", "date", 'style="max-width:10rem"')}${inp("calendar." + i + ".title", "text", 'placeholder="Naslov"')}${sel("calendar." + i + ".type", [["event", "dogodek"], ["deadline", "rok"], ["brevet", "brevet"]], 'style="max-width:8rem"')}<button class="btn small danger edit-only" data-act="del" data-arr="calendar" data-i="${i}">×</button></div>`).join("") : '<p class="note">Breveti in roki prijave se prikažejo samodejno. Tu dodaš trening bloke, testiranje opreme, rezervacije ipd.</p>'}
+  <button class="btn small edit-only" data-act="add-cal">Dodaj vnos</button></div>`;
+};
+function iso(d) { return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+
+V.podatki = () => `<h2>Podatki</h2>
+  <p class="lead">Aplikacija in podatki sta ločena. Podatki so v datoteki pbp-data.json. Ko urediš plan, izvozi JSON in ga naloži v GitHub repozitorij namesto starega. Partner in ekipa ob naslednjem odprtju vidita novo verzijo.</p>
+  <div class="box">
+    <p>Trenutni vir: <b>${esc(S.source)}</b>. Shema v${num(D.schemaVersion)}. Zadnja posodobitev: ${esc(D.meta?.updated || "–")}.</p>
+    <div class="row"><button class="btn fill" data-act="export">Izvozi pbp-data.json</button><button class="btn" data-act="import">Uvozi JSON</button><button class="btn" data-act="reload">Naloži s strežnika</button><button class="btn danger edit-only" data-act="reset">Ponastavi na privzeto</button></div>
+  </div>
+  <h3>Postopek posodobitve</h3>
+  <div class="box"><ol style="margin:0;padding-left:1.2rem">
+    <li>Vklopi urejanje in vnesi spremembe.</li>
+    <li>Izvozi pbp-data.json.</li>
+    <li>Na GitHubu v repozitoriju: Add file, Upload files, povleci datoteko, Commit.</li>
+    <li>Čez minuto je posodobljeno na naslovu GitHub Pages.</li>
+  </ol>
+  <p class="note">Nova verzija aplikacije (index.html) se nalaga enako. Podatkov ne izgubiš, ker so v svoji datoteki.</p></div>`;
+
+/* ---------- render & events ---------- */
+function render() {
+  document.body.classList.toggle("read", !S.edit);
+  document.getElementById("modeBtn").textContent = S.edit ? "Končaj urejanje" : "Uredi";
+  document.getElementById("modeBtn").classList.toggle("fill", S.edit);
+  document.getElementById("tabs").innerHTML = TABS.map(([k, l]) => `<button role="tab" data-tab="${k}" aria-selected="${k === S.tab}">${l}</button>`).join("");
+  const dt = daysTo(D.event.startDate);
+  document.getElementById("count").textContent = dt >= 0 ? `še ${dt} dni` : "";
+  document.getElementById("dirty").hidden = !S.dirty;
+  const m = document.getElementById("main");
+  m.innerHTML = V[S.tab]();
+  if (!S.edit) m.querySelectorAll("[data-path]").forEach(el => el.disabled = true);
+}
+function markDirty() { S.dirty = true; D.meta = D.meta || {}; D.meta.updated = iso(new Date()); }
+function rerenderKeepFocus() {
+  setTimeout(() => {
+    const a = document.activeElement, ap = a && a.dataset ? (a.dataset.path || a.dataset.live) : null;
+    const y = window.scrollY; render(); window.scrollTo(0, y);
+    if (ap) { const n = document.querySelector(`[data-path="${ap}"],[data-live="${ap}"]`); if (n) n.focus(); }
+  }, 0);
+}
+document.addEventListener("change", e => {
+  const el = e.target;
+  if (el.dataset.live) {
+    const id = el.dataset.live;
+    if (el.value) S.live[id] = Math.round((new Date(el.value) - startDate()) / 60000); else delete S.live[id];
+    saveLive(); rerenderKeepFocus(); return;
+  }
+  if (!el.dataset.path) return;
+  let v;
+  if (el.dataset.type === "num") v = el.value === "" ? null : +el.value;
+  else if (el.dataset.type === "bool") v = el.checked;
+  else if (el.dataset.type === "lines") v = el.value.split("\n").map(s => s.trim()).filter(Boolean);
+  else v = el.value;
+  if (/\.season$/.test(el.dataset.path)) v = +v;
+  setPath(el.dataset.path, v);
+  markDirty(); rerenderKeepFocus();
+});
+function saveLive() { try { localStorage.setItem("pbp-live", JSON.stringify(S.live)); } catch (e) {} }
+document.addEventListener("click", e => {
+  const tab = e.target.closest("[data-tab]");
+  if (tab) { S.tab = tab.dataset.tab; try { history.replaceState(null, "", "#" + S.tab); } catch (_) {} render(); window.scrollTo(0, 0); return; }
+  const b = e.target.closest("[data-act]"); if (!b) return;
+  const a = b.dataset.act;
+  const edit = fn => { fn(); markDirty(); render(); };
+  if (a === "del") { if (!confirm("Res odstranim?")) return; edit(() => getPath(b.dataset.arr).splice(+b.dataset.i, 1)); }
+  else if (a === "add-ctl") edit(() => { const l = D.controls.at(-1); D.controls.push({ id: uid("k"), name: "Nova kontrola", km: num(l?.km) + 80, gainM: 0, lossM: 0, closeH: null, crew: true, stopType: "hitri", stopMin: null, sleepMin: 0, foodKcal: 0, extraTasks: [], notes: "", placeholder: false }); });
+  else if (a === "unflag") edit(() => D.controls.forEach(c => c.placeholder = false));
+  else if (a === "add-stop") edit(() => D.stopTypes.push({ id: uid("s"), name: "Nov tip", minutes: 15, food: "", tasks: [] }));
+  else if (a === "add-brevet") edit(() => D.brevets.push({ id: uid("b"), season: 2027, date: "", name: "Nov brevet", distance: 0, elevationM: 0, organizer: "", status: "planiran", homologation: "", movingTimeH: null, totalTimeH: null, avgPowerW: null, obsFood: "", obsGear: "", obsSleep: "", obsIssues: "" }));
+  else if (a === "add-cal") edit(() => D.calendar.push({ id: uid("c"), date: iso(new Date()), title: "", type: "event" }));
+  else if (a === "add-link") edit(() => D.event.links.push({ label: "Povezava", url: "https://" }));
+  else if (a === "apply-cal") edit(() => D.physics.calibrationPct = +b.dataset.v);
+  else if (a === "clear-live") { if (confirm("Počistim vse dejanske čase?")) { S.live = {}; saveLive(); render(); } }
+  else if (a === "unlive") { delete S.live[b.dataset.id]; saveLive(); render(); }
+  else if (a === "cal") { let [y, m] = S.calMonth; m += +b.dataset.d; if (m < 0) { m = 11; y--; } if (m > 11) { m = 0; y++; } S.calMonth = [y, m]; render(); }
+  else if (a === "cal-today") { S.calMonth = null; render(); }
+  else if (a === "cal-pbp") { const d = new Date(D.event.startDate + "T12:00"); S.calMonth = [d.getFullYear(), d.getMonth()]; render(); }
+  else if (a === "export") exportJSON();
+  else if (a === "import") document.getElementById("fileIn").click();
+  else if (a === "reload") loadServer(true);
+  else if (a === "reset") { if (confirm("Ponastavim vse podatke na privzete? Neizvoženi podatki se izgubijo.")) { D = clone(DEFAULT_DATA); S.source = "vgrajeni privzeti podatki"; markDirty(); render(); } }
+});
+document.getElementById("modeBtn").addEventListener("click", () => { S.edit = !S.edit; render(); });
+document.getElementById("fileIn").addEventListener("change", e => {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = () => { try { D = migrate(JSON.parse(r.result)); S.source = "uvoženo: " + f.name; S.dirty = false; render(); } catch (err) { alert("Datoteke ni mogoče prebrati: " + err.message); } };
+  r.readAsText(f); e.target.value = "";
+});
+function exportJSON() {
+  const blob = new Blob([JSON.stringify(D, null, 1)], { type: "application/json" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "pbp-data.json";
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  S.dirty = false; render();
+}
+/* schema migrations: add a step here whenever the data shape changes */
+function migrate(d) {
+  if (!d || typeof d !== "object") throw new Error("ni JSON objekt");
+  const base = clone(DEFAULT_DATA);
+  for (const k of Object.keys(base)) if (d[k] === undefined) d[k] = base[k];
+  for (const k of ["event", "physics", "nutrition", "sleep"]) for (const kk of Object.keys(base[k])) if (d[k][kk] === undefined) d[k][kk] = base[k][kk];
+  if (num(d.schemaVersion) > SCHEMA) alert("Podatki so iz novejše verzije aplikacije. Posodobi index.html.");
+  d.schemaVersion = SCHEMA;
+  return d;
+}
+async function loadServer(manual) {
+  if (!/^https?:/.test(location.protocol)) { if (manual) alert("Nalaganje s strežnika deluje samo na GitHub Pages (ne pri odprti lokalni datoteki)."); return; }
+  try {
+    const r = await fetch("pbp-data.json", { cache: "no-store" });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    D = migrate(await r.json()); S.source = "pbp-data.json s strežnika"; S.dirty = false; render();
+  } catch (err) { S.source = "vgrajeni privzeti podatki (strežnik: " + err.message + ")"; if (manual) alert("Nalaganje ni uspelo: " + err.message); render(); }
+}
+window.addEventListener("beforeunload", e => { if (S.dirty) { e.preventDefault(); e.returnValue = ""; } });
+if ("serviceWorker" in navigator && /^https?:/.test(location.protocol)) navigator.serviceWorker.register("sw.js").catch(() => {});
+render();
+loadServer(false);
+</script>
+</body>
+</html>
