@@ -1,8 +1,9 @@
 {
- "schemaVersion": 1,
+ "schemaVersion": 2,
  "meta": {
   "updated": "2026-10-26",
-  "note": "Kontrole so začasne (enakomerno razporejene). Uradna trasa 2027 še ni objavljena."
+  "note": "Kontrole so začasne (enakomerno razporejene). Uradna trasa 2027 še ni objavljena.",
+  "savedAt": "2026-10-26T00:00:00Z"
  },
  "event": {
   "name": "Paris-Brest-Paris Randonneurs",
@@ -45,9 +46,9 @@
   {
    "id": "r1",
    "name": "Jure",
-   "weightKg": 80,
+   "weightKg": 75,
    "bikeKg": 11,
-   "ftpW": 296,
+   "ftpW": 260,
    "pctFlat": 60,
    "pctClimb": 72,
    "pctDescent": 20,
@@ -56,7 +57,7 @@
   },
   {
    "id": "r2",
-   "name": "Mitja",
+   "name": "Partner",
    "weightKg": 75,
    "bikeKg": 11,
    "ftpW": 260,
@@ -136,16 +137,16 @@
   {
    "id": "b1",
    "season": 2026,
-   "date": "2026-10-25",
-   "name": "BRM 200 km Benkovac - zima",
-   "distance": 212.39,
-   "elevationM": 1.796,
-   "organizer": "Randonneurs Croatie",
-   "status": "opravljen",
-   "homologation": "BC-2026-9748",
-   "movingTimeH": 7,
-   "totalTimeH": 7,
-   "avgPowerW": 184,
+   "date": "",
+   "name": "Brevet oktober 2026 (za predprijavo)",
+   "distance": 0,
+   "elevationM": 0,
+   "organizer": "",
+   "status": "planiran",
+   "homologation": "",
+   "movingTimeH": null,
+   "totalTimeH": null,
+   "avgPowerW": null,
    "obsFood": "",
    "obsGear": "",
    "obsSleep": "",
@@ -229,10 +230,10 @@
   {
    "id": "k0",
    "name": "Rambouillet (start)",
-   "km": 0,
+   "km": 0.0,
    "gainM": 0,
    "lossM": 0,
-   "closeH": 0,
+   "closeH": 0.0,
    "crew": true,
    "stopType": "",
    "stopMin": null,
@@ -240,7 +241,9 @@
    "foodKcal": 0,
    "extraTasks": [],
    "notes": "",
-   "placeholder": true
+   "placeholder": true,
+   "lat": 48.644,
+   "lon": 1.8296
   },
   {
    "id": "k1",
@@ -248,7 +251,7 @@
    "km": 76.2,
    "gainM": 750,
    "lossM": 750,
-   "closeH": 5,
+   "closeH": 5.0,
    "crew": true,
    "stopType": "hitri",
    "stopMin": null,
@@ -256,7 +259,9 @@
    "foodKcal": 400,
    "extraTasks": [],
    "notes": "",
-   "placeholder": true
+   "placeholder": true,
+   "lat": null,
+   "lon": null
   },
   {
    "id": "k2",
@@ -264,7 +269,7 @@
    "km": 152.5,
    "gainM": 750,
    "lossM": 750,
-   "closeH": 10,
+   "closeH": 10.0,
    "crew": true,
    "stopType": "hitri",
    "stopMin": null,
@@ -272,7 +277,9 @@
    "foodKcal": 400,
    "extraTasks": [],
    "notes": "",
-   "placeholder": true
+   "placeholder": true,
+   "lat": null,
+   "lon": null
   },
   {
    "id": "k3",
@@ -280,7 +287,7 @@
    "km": 228.8,
    "gainM": 750,
    "lossM": 750,
-   "closeH": 15,
+   "closeH": 15.0,
    "crew": true,
    "stopType": "podpora",
    "stopMin": null,
@@ -288,15 +295,17 @@
    "foodKcal": 900,
    "extraTasks": [],
    "notes": "",
-   "placeholder": true
+   "placeholder": true,
+   "lat": null,
+   "lon": null
   },
   {
    "id": "k4",
    "name": "Kontrola 4",
-   "km": 305,
+   "km": 305.0,
    "gainM": 750,
    "lossM": 750,
-   "closeH": 20,
+   "closeH": 20.0,
    "crew": true,
    "stopType": "hitri",
    "stopMin": null,
@@ -304,7 +313,9 @@
    "foodKcal": 400,
    "extraTasks": [],
    "notes": "",
-   "placeholder": true
+   "placeholder": true,
+   "lat": null,
+   "lon": null
   },
   {
    "id": "k5",
@@ -312,7 +323,7 @@
    "km": 381.2,
    "gainM": 750,
    "lossM": 750,
-   "closeH": 25,
+   "closeH": 25.0,
    "crew": true,
    "stopType": "hitri",
    "stopMin": null,
@@ -320,7 +331,9 @@
    "foodKcal": 400,
    "extraTasks": [],
    "notes": "",
-   "placeholder": true
+   "placeholder": true,
+   "lat": null,
+   "lon": null
   },
   {
    "id": "k6",
@@ -328,7 +341,7 @@
    "km": 457.5,
    "gainM": 750,
    "lossM": 750,
-   "closeH": 30,
+   "closeH": 30.0,
    "crew": true,
    "stopType": "spanje",
    "stopMin": null,
@@ -336,7 +349,9 @@
    "foodKcal": 900,
    "extraTasks": [],
    "notes": "",
-   "placeholder": true
+   "placeholder": true,
+   "lat": null,
+   "lon": null
   },
   {
    "id": "k7",
@@ -344,7 +359,7 @@
    "km": 533.8,
    "gainM": 750,
    "lossM": 750,
-   "closeH": 35,
+   "closeH": 35.0,
    "crew": true,
    "stopType": "hitri",
    "stopMin": null,
@@ -352,15 +367,17 @@
    "foodKcal": 400,
    "extraTasks": [],
    "notes": "",
-   "placeholder": true
+   "placeholder": true,
+   "lat": null,
+   "lon": null
   },
   {
    "id": "k8",
    "name": "Brest",
-   "km": 610,
+   "km": 610.0,
    "gainM": 750,
    "lossM": 750,
-   "closeH": 40,
+   "closeH": 40.0,
    "crew": true,
    "stopType": "hitri",
    "stopMin": null,
@@ -368,7 +385,9 @@
    "foodKcal": 400,
    "extraTasks": [],
    "notes": "",
-   "placeholder": true
+   "placeholder": true,
+   "lat": 48.3904,
+   "lon": -4.4861
   },
   {
    "id": "k9",
@@ -376,7 +395,7 @@
    "km": 686.2,
    "gainM": 750,
    "lossM": 750,
-   "closeH": 45,
+   "closeH": 45.0,
    "crew": true,
    "stopType": "podpora",
    "stopMin": null,
@@ -384,7 +403,9 @@
    "foodKcal": 900,
    "extraTasks": [],
    "notes": "",
-   "placeholder": true
+   "placeholder": true,
+   "lat": null,
+   "lon": null
   },
   {
    "id": "k10",
@@ -392,7 +413,7 @@
    "km": 762.5,
    "gainM": 750,
    "lossM": 750,
-   "closeH": 50,
+   "closeH": 50.0,
    "crew": true,
    "stopType": "hitri",
    "stopMin": null,
@@ -400,7 +421,9 @@
    "foodKcal": 400,
    "extraTasks": [],
    "notes": "",
-   "placeholder": true
+   "placeholder": true,
+   "lat": null,
+   "lon": null
   },
   {
    "id": "k11",
@@ -408,7 +431,7 @@
    "km": 838.8,
    "gainM": 750,
    "lossM": 750,
-   "closeH": 55,
+   "closeH": 55.0,
    "crew": true,
    "stopType": "hitri",
    "stopMin": null,
@@ -416,15 +439,17 @@
    "foodKcal": 400,
    "extraTasks": [],
    "notes": "",
-   "placeholder": true
+   "placeholder": true,
+   "lat": null,
+   "lon": null
   },
   {
    "id": "k12",
    "name": "Kontrola 12",
-   "km": 915,
+   "km": 915.0,
    "gainM": 750,
    "lossM": 750,
-   "closeH": 60,
+   "closeH": 60.0,
    "crew": true,
    "stopType": "spanje",
    "stopMin": null,
@@ -432,7 +457,9 @@
    "foodKcal": 900,
    "extraTasks": [],
    "notes": "",
-   "placeholder": true
+   "placeholder": true,
+   "lat": null,
+   "lon": null
   },
   {
    "id": "k13",
@@ -440,7 +467,7 @@
    "km": 991.2,
    "gainM": 750,
    "lossM": 750,
-   "closeH": 65,
+   "closeH": 65.0,
    "crew": true,
    "stopType": "hitri",
    "stopMin": null,
@@ -448,7 +475,9 @@
    "foodKcal": 400,
    "extraTasks": [],
    "notes": "",
-   "placeholder": true
+   "placeholder": true,
+   "lat": null,
+   "lon": null
   },
   {
    "id": "k14",
@@ -456,7 +485,7 @@
    "km": 1067.5,
    "gainM": 750,
    "lossM": 750,
-   "closeH": 70,
+   "closeH": 70.0,
    "crew": true,
    "stopType": "podpora",
    "stopMin": null,
@@ -464,7 +493,9 @@
    "foodKcal": 900,
    "extraTasks": [],
    "notes": "",
-   "placeholder": true
+   "placeholder": true,
+   "lat": null,
+   "lon": null
   },
   {
    "id": "k15",
@@ -472,7 +503,7 @@
    "km": 1143.8,
    "gainM": 750,
    "lossM": 750,
-   "closeH": 75,
+   "closeH": 75.0,
    "crew": true,
    "stopType": "hitri",
    "stopMin": null,
@@ -480,15 +511,17 @@
    "foodKcal": 400,
    "extraTasks": [],
    "notes": "",
-   "placeholder": true
+   "placeholder": true,
+   "lat": null,
+   "lon": null
   },
   {
    "id": "k16",
    "name": "Rambouillet (cilj)",
-   "km": 1220,
+   "km": 1220.0,
    "gainM": 750,
    "lossM": 750,
-   "closeH": 80,
+   "closeH": 80.0,
    "crew": true,
    "stopType": "",
    "stopMin": null,
@@ -496,7 +529,30 @@
    "foodKcal": 0,
    "extraTasks": [],
    "notes": "",
-   "placeholder": true
+   "placeholder": true,
+   "lat": 48.644,
+   "lon": 1.8296
   }
- ]
+ ],
+ "route": {
+  "name": "",
+  "lengthKm": null,
+  "upM": null,
+  "track": [],
+  "zones": [
+   {
+    "name": "Roz-sur-Couesnon",
+    "lat": 48.5978,
+    "lon": -1.5917,
+    "radiusKm": 4
+   },
+   {
+    "name": "Pleine-Fougères",
+    "lat": 48.5333,
+    "lon": -1.5653,
+    "radiusKm": 4
+   }
+  ],
+  "zonesNote": "Približno. Uradne meje cone objavi organizator."
+ }
 }

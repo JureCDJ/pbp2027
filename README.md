@@ -1,22 +1,28 @@
 # PBP 2027 – načrt
 
-Statična aplikacija za GitHub Pages. Brez zunanjih knjižnic.
+Statična aplikacija za GitHub Pages.
 
 ## Datoteke
-- `index.html` – aplikacija (nadgradnje funkcij)
-- `pbp-data.json` – podatki (tvoji vnosi)
-- `sw.js` – offline delovanje na telefonu
+- `index.html` – aplikacija
+- `pbp-data.json` – podatki
+- `sw.js` – offline delovanje (zemljevid potrebuje internet)
 
-## Postavitev (enkrat)
-1. Nov repozitorij na GitHubu (npr. `pbp2027`), naloži vse tri datoteke.
-2. Settings → Pages → Source: Deploy from a branch → `main` / root → Save.
-3. Čez minuto: `https://<uporabnik>.github.io/pbp2027/`
+## Postavitev
+1. Repozitorij `pbp2027` (Public), naloži vse datoteke v koren.
+2. Settings → Pages → Deploy from a branch → `main` / root → Save.
+3. Naslov: `https://<uporabnik>.github.io/pbp2027/`
 
-## Posodabljanje podatkov
-Uredi → spremembe → Podatki → Izvozi pbp-data.json → na GitHubu Add file → Upload files → Commit.
+## Žeton za shranjevanje (enkrat)
+1. GitHub → profilna slika → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token.
+2. Expiration: po koncu PBP (npr. 30. 9. 2027).
+3. Repository access: Only select repositories → `pbp2027`.
+4. Permissions → Repository permissions → Contents: Read and write.
+5. Generate, kopiraj žeton (prikaže se samo enkrat).
+6. V aplikaciji: Uredi → Podatki → Povezava z GitHubom → prilepi žeton → Shrani nastavitve.
 
-## Nadgradnja aplikacije
-Zamenjaj samo `index.html`. Podatki ostanejo. Ob spremembi strukture podatkov se poveča `schemaVersion` in doda korak v funkcijo `migrate()`.
+## Delo
+Uredi → spremembe (sproti shranjene v brskalnik) → Shrani na GitHub.
+Nova verzija aplikacije: na GitHubu zamenjaj samo `index.html`.
 
 ## Opomba
-Repozitorij na GitHub Pages je javen (brezplačni račun). Ne vpisuj osebnih podatkov, ki jih ne želiš javno.
+Repozitorij je javen: vse v `pbp-data.json` je vidno vsem.

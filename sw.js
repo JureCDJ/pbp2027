@@ -1,5 +1,5 @@
 // Offline cache: app shell cache-first, data network-first (falls back to cache without signal)
-const C = "pbp-v1";
+const C = "pbp-v2";
 self.addEventListener("install", e => { e.waitUntil(caches.open(C).then(c => c.addAll(["./", "index.html", "pbp-data.json"])).then(() => self.skipWaiting())); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== C).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
 self.addEventListener("fetch", e => {
